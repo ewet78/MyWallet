@@ -1,0 +1,5 @@
+bin/
+obj/
+MyWallet.cbp
+MyWallet.depend
+users.xml
