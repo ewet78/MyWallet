@@ -13,6 +13,7 @@ class AuxiliaryMethods
 public:
     static string convertIntToString(int number);
     static int convertStringToInt(string number);
+    static string readLine();
 };
 
 #endif

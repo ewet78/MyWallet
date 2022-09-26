@@ -13,6 +13,8 @@ class MyWallet{
 public:
     MyWallet(string usersFileName) : userManager(usersFileName){};
     void registerUser();
+    void loggingUser();
+    void changePasswordOfLoggedUser();
 };
 
 
