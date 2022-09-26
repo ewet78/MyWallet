@@ -18,3 +18,10 @@ static int AuxiliaryMethods::convertStringToInt(string number)
 
     return numberInt;
 }
+
+string AuxiliaryMethods::readLine()
+{
+    string input = "";
+    getline(cin, input);
+    return input;
+}

@@ -6,7 +6,7 @@ string UsersFile::getUsersFileName(){
 
 void UsersFile::addUserToFile(User user){
 
-    bool fileExist = xmlUsers.Load("users.xml");
+    bool fileExist = xmlUsers.Load(USERS_FILE_NAME);
 
     if (!fileExist)
     {
@@ -23,7 +23,7 @@ void UsersFile::addUserToFile(User user){
     xmlUsers.AddElem("Name", user.getName());
     xmlUsers.AddElem("Surname", user.getSurname());
 
-    xmlUsers.Save("users.xml");
+    xmlUsers.Save(USERS_FILE_NAME);
 
 
 }
@@ -32,27 +32,41 @@ vector <User> UsersFile::loadUsersFromFile(){
 
     User user;
     vector <User> users;
-    xmlUsers.Load("users.xml");
-    xmlUsers.ResetPos();
 
-    while(xmlUsers.FindElem()){
-        xmlUsers.FindElem();
-        xmlUsers.IntoElem();
-        xmlUsers.FindElem();
-        xmlUsers.IntoElem();
-        xmlUsers.FindElem();
-        user.setUserId(AuxiliaryMethods::convertStringToInt(xmlUsers.GetData()));
-        xmlUsers.FindElem();
-        user.setLogin(xmlUsers.GetData());
-        xmlUsers.FindElem();
-        user.setPassword(xmlUsers.GetData());
-        xmlUsers.FindElem();
-        user.setName(xmlUsers.GetData());
-        xmlUsers.FindElem();
-        user.setSurname(xmlUsers.GetData());
-        users.push_back(user);
+    if (xmlUsers.Load(USERS_FILE_NAME)) {
+            xmlUsers.FindElem();
+            xmlUsers.IntoElem();
 
+            while(xmlUsers.FindElem("User")){
+                xmlUsers.IntoElem();
+                xmlUsers.FindElem("UserId");
+                user.setUserId(AuxiliaryMethods::convertStringToInt(xmlUsers.GetData()));
+                xmlUsers.FindElem("Login");
+                user.setLogin(xmlUsers.GetData());
+                xmlUsers.FindElem("Password");
+                user.setPassword(xmlUsers.GetData());
+                xmlUsers.FindElem("Name");
+                user.setName(xmlUsers.GetData());
+                xmlUsers.FindElem("Surname");
+                user.setSurname(xmlUsers.GetData());
+                xmlUsers.OutOfElem();
+
+                users.push_back(user);
+
+            }
     }
 
+    return users;
 
+}
+
+void UsersFile::saveAllUsersToFile(vector <User> &users){
+    if (xmlUsers.Load(USERS_FILE_NAME)){
+        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++){
+          //???
+        }
+    }
+    else {
+        cout << "The file cannot be opened: " << USERS_FILE_NAME << endl;
+    }
 }

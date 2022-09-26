@@ -6,8 +6,10 @@ using namespace std;
 
 int main()
 {
-    MyWallet myWallet("users");
+    MyWallet myWallet("users.xml");
     myWallet.registerUser();
+    myWallet.loggingUser();
+    myWallet.changePasswordOfLoggedUser();
 
     cout << "Hello world!" << endl;
     return 0;
