@@ -19,9 +19,14 @@ static int AuxiliaryMethods::convertStringToInt(string number)
     return numberInt;
 }
 
-string AuxiliaryMethods::readLine()
+static string AuxiliaryMethods::readLine()
 {
     string input = "";
     getline(cin, input);
     return input;
+}
+
+static double AuxiliaryMethods::convertStringToDouble(string amount){
+    double number = stod(amount);
+    return number;
 }

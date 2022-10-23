@@ -15,11 +15,11 @@ class UsersFile{
     CMarkup xmlUsers;
 public:
     UsersFile(string usersFileName) : USERS_FILE_NAME(usersFileName){};
-    string getUsersFileName();
+    string getFileName();
     void addUserToFile(User user);
     vector <User> loadUsersFromFile();
 
-    void saveAllUsersToFile(vector <User> &users);
+    void changePasswordInXML(int userId, string newPassword);
 
 };
 

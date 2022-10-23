@@ -1,6 +1,6 @@
 #include "UsersFile.h"
 
-string UsersFile::getUsersFileName(){
+string UsersFile::getFileName(){
     return USERS_FILE_NAME;
 }
 
@@ -60,13 +60,23 @@ vector <User> UsersFile::loadUsersFromFile(){
 
 }
 
-void UsersFile::saveAllUsersToFile(vector <User> &users){
-    if (xmlUsers.Load(USERS_FILE_NAME)){
-        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++){
-          //???
+ void UsersFile::changePasswordInXML(int userId, string newPassword){
+    if (xmlUsers.Load(USERS_FILE_NAME)) {
+        xmlUsers.FindElem();
+        xmlUsers.IntoElem();
+
+        while (xmlUsers.FindElem("User")) {
+            xmlUsers.IntoElem();
+            xmlUsers.FindElem("UserId");
+
+            if (xmlUsers.GetData() == AuxiliaryMethods::convertIntToString(userId)) {
+                xmlUsers.FindElem("Password");
+                xmlUsers.SetData(newPassword);
+                xmlUsers.Save(USERS_FILE_NAME);
+                break;
+            }
+
+            xmlUsers.OutOfElem();
         }
-    }
-    else {
-        cout << "The file cannot be opened: " << USERS_FILE_NAME << endl;
     }
 }
