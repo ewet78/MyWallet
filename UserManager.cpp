@@ -126,6 +126,6 @@ void UserManager::changePasswordOfLoggedUser(int idLoggedUser){
             system("pause");
         }
     }
-    usersFile.saveAllUsersToFile(users);
+    usersFile.changePasswordInXML(idLoggedUser, newPassword);
 
 }

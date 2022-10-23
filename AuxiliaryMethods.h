@@ -14,6 +14,7 @@ public:
     static string convertIntToString(int number);
     static int convertStringToInt(string number);
     static string readLine();
+    static double convertStringToDouble(string amount);
 };
 
 #endif
